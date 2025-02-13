@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Galería de Arte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f5f5f5; /* Light background for contrast */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 1em; /* Corrected the CSS syntax */
+            color: #4b0082;
+            text-align: center;
+            margin: 1; /* Removed margin */
+        }
+
+        form {
+            margin: 0; /* Removed margin */
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 0; /* Removed margin */
+            border: none;
+            border-radius: 5px;
+            background-color: FireBrick;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: Gold;
+            color: FireBrick;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 1200px;
+            margin: 0; /* Removed margin */
+        }
+
+        .frame {
+            border: 10px solid #8b4513; /* SaddleBrown for frame */
+            padding: 10px; /* Reduced padding */
+            margin: 5px 0; /* Reduced margin */
+            background-color: #fffacd; /* LemonChiffon for contrast */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            display: inline-block; /* Adjust frame size according to content */
+            max-width: 1155px; /* Maximum width */
+        }
+
+        .frame pre.art {
+            font-family: 'Courier New', Courier, monospace;
+            color: FireBrick;
+            background-color: rgba(255, 215, 0, 0.1); /* Light Gold background */
+            padding: 5px; /* Reduced padding */
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            white-space: pre-wrap; /* Enable word wrapping for ASCII art */
+            word-wrap: break-word; /* Break long words to fit within container */
+            margin: 0; /* Removed margin */
+        }
+
+        .caption {
+            font-size: 1em; /* Corrected the CSS syntax */
+            color: #4b0082;
+            margin: 5px 0; /* Reduced margin */
+            text-align: center;
+        }
+
+        hr {
+            border: 1px solid #4b0082;
+            width: 80%;
+            margin: 5px 0; /* Reduced margin */
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Arte</h1>
+    <form action="{{ url_for('menu') }}" method="get">
+        <button type="submit">Volver al menú</button>
+    </form>
+    <div class="gallery"><br>
+        {% for art, caption in all_ascii_art %}
+            <div class="frame">
+                <pre class="art">{{ art | safe }}</pre>
+                <p class="caption">{{ caption }}</p>
+            </div>
+            
+        {% endfor %}
+    </div>
+    <form action="{{ url_for('menu') }}" method="get">
+        <button type="submit">Volver al menú</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const arts = document.querySelectorAll('.art');
+            arts.forEach(art => {
+                const textLength = art.innerText.length;
+                if (textLength > 4600) { // Adjusted the threshold to 4600 characters
+                    art.style.fontSize = '10px'; // Adjust the font size as needed
+                } else {
+                    art.style.fontSize = '12px'; // Default font size
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadísticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4b0082;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.2em;
+            color: FireBrick;
+            margin: 10px 0;
+        }
+
+        p, label {
+            font-size: 1.1em;
+            color: #000080;
+            margin: 5px 0;
+        }
+
+        form {
+            margin: 15px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, FireBrick, #a00040);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, Gold, #d4af37);
+            color: FireBrick;
+            transform: scale(1.05);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #special_img {
+            color: FireBrick;
+            border: 4px solid MidnightBlue;
+            background-color: rgba(255, 215, 0, 0.3);
+            padding: 2px;
+            display: inline-block; /* Adjust frame size according to content */
+            max-width: 500px; /* Added max-width */
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 15px auto; /* Centered with margin */
+            border-radius: 8px; /* Added border-radius */
+			border: 10px solid #8b4513; /* SaddleBrown for frame */
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .incorrect-answers {
+            text-align: left;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+            font-size: 0.9em;
+        }
+
+        .incorrect-answers ol {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .incorrect-answers li {
+            margin-bottom: 8px;
+        }
+
+        #ascii-art {
+            text-align: center;
+            margin-top: 20px;
+			padding: 10px; /* Reduced padding */
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            margin: 5px 0; /* Reduced margin */
+            font-size: 10px; /* Consistent size */
+			max-width: 888px; /* Maximum width */
+			display: inline-block; /* Adjust frame size according to content */
+			background-color: #fffacd;
+			border: 10px solid #8b4513; /* SaddleBrown for frame */
+        }
+
+        #ascii-art pre {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: inherit; /* Inherit size from parent */
+			white-space: pre-wrap; /* Enable word wrapping for ASCII art */
+        }
+
+        .battery-container {
+            width: 400px; /* Adjusted width */
+            height: 20px;
+            border: 1px solid #ccc;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px; /* Added margin */
+            padding: 0;
+            border-radius: 5px; /* Added border-radius */
+            overflow: hidden; /* Hide progress if it exceeds container */
+
+        }
+
+        .battery-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            border-radius: 5px; /* Added border-radius */
+            transition: width 0.5s ease; /* Smooth width transition */
+        }
+
+        .battery-percentage {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px; /* Reduced margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Estadísticas del Juego</h1>
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+
+        <p>
+            Precisión ({{ correct }}/{{ total }}):
+            <div class="battery-container">
+                <div class="battery-progress" id="batteryProgress"></div>
+            </div> <span id="accuracyPercentage" class="battery-percentage"> {{ accuracy }}%</span>
+        </p>
+
+        {% if accuracy %}
+            {% if accuracy > 90 %}
+                <div id="special_img">
+                    <pre><b>{{ special_img | safe }}</b></pre>
+                </div>
+                <form action="{{ url_for('listo') }}" method="get">
+                    <button type="submit">Escucha "Listo" y Más</button>
+                </form>
+            {% endif %}
+        {% endif %}
+
+        <div id="ascii-art">
+            <pre>{{ ascii_art | safe }}</pre>
+        </div>
+
+        <div class="incorrect-answers">
+            {% if incorrect > 1 %}
+                <h2>{{ incorrect }} respuestas incorrectas:</h2>
+            {% else %}
+                <h2>{{ incorrect }} respuesta incorrecta:</h2>
+            {% endif %}
+            <ol>
+                {% if ans_words %}
+                    {% for word, details in ans_words.items() %}
+                        <li>
+                            {{ word }} 
+                            <b>|</b> 
+                            {% if details.correct_answer %}
+                                <b>{{ details.correct_answer }}</b>
+                            {% else %}
+                                <b>{{ details.translation }}</b>
+                            {% endif %}
+                            {% if details.verb %}
+                                <b>{{ details.verb }}</b> para '{{ details.pronoun }}' en <em>{{ details.tense }}</em>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No incorrect answers recorded.</p>
+                {% endif %}
+            </ol>
+        </div>
+
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let accuracy = {{ accuracy }};
+            if (accuracy === null || accuracy === undefined) {
+                accuracy = 0;
+            }
+            accuracy = Number(accuracy);
+
+            const batteryProgress = document.getElementById('batteryProgress');
+            const accuracyPercentageSpan = document.getElementById('accuracyPercentage');
+
+            if (batteryProgress && accuracyPercentageSpan) {
+                batteryProgress.style.width = `${accuracy}%`;
+                accuracyPercentageSpan.textContent = `${accuracy}%`;
+
+                // Color coding for the progress bar
+                if (accuracy === 100) {
+                    batteryProgress.style.backgroundColor = "MidnightBlue";
+                } else if (accuracy < 50) {
+                    batteryProgress.style.backgroundColor = "FireBrick";
+                } else if (accuracy < 80) { // Corrected condition
+                    batteryProgress.style.backgroundColor = "Gold";
+                } else {
+                    batteryProgress.style.backgroundColor = "#4CAF50";
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadísticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #4b0082;
+            margin: 1px 0;
+        }
+
+        h2 {
+            font-size: 1em;
+            color: FireBrick;
+            margin: 0px 0;
+        }
+
+        p, label {
+            font-size: 1em;
+            color: #000080;
+            margin: 1px 0;
+        }
+
+        form {
+            margin: 10px 0;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin: 1px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 1px;
+            border: none;
+            border-radius: 5px;
+            background-color: FireBrick;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: Gold;
+            color: FireBrick;
+        }
+
+        #special_img {
+            color: FireBrick;
+            border: 4px solid MidnightBlue;
+            background-color: rgba(255, 215, 0, 0.3);
+            padding: 10px;
+            width: 67%;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .incorrect-answers {
+            text-align: left; /* Align text to the left within the container */
+            margin: 30px 0;
+            width: 100%; /* Set a smaller width for incorrect answers */
+            max-width: 555px; /* Set a maximum width */
+            font-size: small;
+        }
+
+        .incorrect-answers ol {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .incorrect-answers li {
+            margin-bottom: 5px;
+        }
+
+        #ascii-art {
+            width: 100%; /* Make ASCII art take full width available */
+            text-align: center; /* Center the ASCII art */
+            margin-top: 20px; /* Add spacing above the ASCII art */
+        }
+
+        #ascii-art pre { /* Target the <pre> tag within #ascii-art */
+            white-space: pre-wrap; /* Allow wrapping of long lines */
+            font-family: monospace; /* Ensure monospace font for ASCII art */
+            font-size: 14px; /* Adjust font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Estadísticas del Juego</h1>
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+        <p>Correcto: {{ correct }}</p>
+        <p>Incorrecto: {{ incorrect }}</p>
+        <p>Total: {{ total }}</p>
+        <p>Precisión: {{ accuracy }}%</p>
+        {% if accuracy %}
+            {% if accuracy > 90 %}
+                <div id="special_img">
+                    <pre><b>{{ special_img | safe }}</b></pre>
+                </div>
+				<form action="{{ url_for('listo') }}" method="get">
+					<button type="submit">Escucha "Listo" y Más</button>
+				</form>
+            {% endif %}
+        {% endif %}
+        <div class="incorrect-answers">
+            <h2>Respuestas incorrectas:</h2>
+            <ol>
+                {% if ans_words %}
+                    {% for word, details in ans_words.items() %}
+                        <li>
+                            {{ word }} 
+                            <b>|</b> 
+                            {% if details.correct_answer %}
+                                <b>{{ details.correct_answer }}</b>
+                            {% else %}
+                                <b>{{ details.translation }}</b>
+                            {% endif %}
+                            {% if details.verb %}
+                                <b>{{ details.verb }}</b> para '{{ details.pronoun }}' en <em>{{ details.tense }}</em>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No incorrect answers recorded.</p>
+                {% endif %}
+            </ol>
+        </div>
+
+        <div id="ascii-art">
+            <pre>{{ ascii_art | safe }}</pre>
+        </div>
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+    </div>
+</body>
+</html>

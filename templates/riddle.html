@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acertijos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+			font-size: 1em; /* Increased heading size */
+        }
+
+        h1 {
+            font-size: 1.5em; /* Increased heading size */
+            color: #4b0082;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px; /* Added margin */
+        }
+
+        h2 {
+            font-size: 1em; /* Increased size */
+            text-align: center;
+            margin: 15px 0; /* Adjusted margin */
+            color: FireBrick; /* Added color */
+        }
+
+        p {
+            font-size: 1em; /* Increased size */
+            margin: 0px 0; /* Adjusted margin */
+            max-width: 600px; /* Added max-width for readability */
+        }
+
+        form {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, FireBrick, #a00040);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, Gold, #d4af37);
+            color: FireBrick;
+            transform: scale(1.05);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin: 8px 0;
+            width: calc(100% - 18px); /* Account for padding and border */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+
+        .image-container { /* Added container for image */
+            margin: 20px 0;
+            max-width: 500px; /* Set max-width for image */
+            text-align: center; /* Center the image */
+			border-radius: 8px; /* Added border-radius */
+        }
+
+        .image-container pre { /* Style the <pre> tag within the container */
+            font-family: monospace; /* Keep monospace font */
+            white-space: pre-wrap; /* Allow wrapping */
+            font-size: 1em; /* Set font size */
+            background-color: #fffacd; /* Lemon background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            border: 8px solid #8b4513;
+			
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Acertijos</h1>
+    <h2>{{ riddle | safe }}</h2>
+
+    {% if not final %}
+        <form method="POST">
+            <label for="user_answer">¿Cuál es la respuesta?</label>
+            <input type="text" name="user_answer" id="user_answer" required> <button type="submit">Enviar</button>
+        </form>
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+    {% endif %}
+
+    {% if feedback %}
+        <p>{{ feedback }}</p>
+    {% endif %}
+
+    {% if img %}
+        <div class="image-container"> <pre>{{ img }}</pre> </div>
+    {% endif %}
+
+    {% if not final %}
+    {% else %}
+        <form action="{{ url_for('menu') }}" method="get">
+            <button type="submit">Volver al Menú</button>
+        </form>
+        <form action="{{ url_for('listo') }}" method="get">
+            <button type="submit">Escucha "Listo" y Más</button>
+        </form>
+    {% endif %}
+
+    <script>
+        document.getElementById('user_answer').focus(); // Set focus to input
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!-- templates/statistics.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadísticas del Juego</title>
+</head>
+<body>
+    <h1>Estadísticas del Juego</h1>
+    <p>Correcto: {{ corr_ans }}</p>
+    <p>Incorrecto: {{ incor_ans }}</p>
+    <p>Total: {{ corr_ans + incor_ans }}</p>
+    <p>Porcentaje de Precisión: {{ (corr_ans / (corr_ans + incor_ans)) * 100 if (corr_ans + incor_ans) > 0 else 0 }}%</p>
+    <a href="{{ url_for('menu') }}">Volver al Menú</a>
+</body>
+</html>

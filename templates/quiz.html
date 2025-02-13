@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0); /* Gradient background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Increased heading size */
+            color: #4b0082;
+            margin-bottom: 15px; /* Added margin */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        p, label {
+            font-size: 1.1em;
+            color: #000080;
+            margin: 8px 0; /* Adjusted margin */
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0; /* Adjusted margin */
+            width: 100%;
+            max-width: 400px; /* Increased max-width */
+        }
+
+        input[type="text"] {
+            padding: 8px; /* Adjusted padding */
+            margin: 5px; /* Adjusted margin */
+            width: calc(100% - 70px); /* Adjust width as needed */
+            border: 1px solid #ccc;
+            border-radius: 8px; /* More rounded input */
+            flex-grow: 1;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px; /* Adjusted padding */
+            margin: 5px; /* Adjusted margin */
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, FireBrick, #a00040); /* Gradient background */
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Added shadow */
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, Gold, #d4af37); /* Gold hover effect */
+            color: FireBrick;
+            transform: scale(1.05);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px; /* Increased max-width */
+            padding: 20px; /* Adjusted padding */
+            background-color: #fffacd; /* Lemon yellow background */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .sentence-container {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px; /* Added margin */
+        }
+
+        .sentence-container p {
+            margin: 5px 0; /* Adjusted margin */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px; /* Adjusted margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Juego</h1>
+        <p>{{ prompt | safe }}</p>
+        <form method="POST">
+            <label for="user_input"><small><b>Tu respuesta:</b></small></label>
+            <input type="text" name="user_input" id="user_input" required>
+            <button type="submit">Enviar</button>
+        </form>
+
+        {% if feedback %}
+            <p>{{ feedback }}</p>
+        {% endif %}
+
+        <div class="button-container">
+            <form method="POST">
+                <input type="hidden" name="user_input" value="me rindo">
+                <button type="submit">Me rindo</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="user_input" value="salida">
+                <button type="submit">Salida</button>
+            </form>
+        </div>
+
+        {% if previous_correct_answer %}
+            <p><strong>Respuesta anterior:</strong></p>
+            <p>{{ previous_correct_answer | safe }}</p>
+            {% if previous_example_sentence %}
+                <div class="sentence-container">
+                    {% set sentences = previous_example_sentence.split(',') %}
+                    {% for sentence in sentences %}
+                        <p><em>{{ sentence.strip() }}</em></p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p><em>*aún no hay frase disponible*</em></p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById('user_input').focus();
+    </script>
+</body>
+</html>

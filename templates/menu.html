@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f8f8f8, #e0e0e0);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #4b0082;
+            margin: 0; /* Removed extra margin */
+            padding: 0; /* Removed extra padding */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        p, label {
+            font-size: 1.1em;
+            color: #000080;
+            margin: 5px 0; /* Reduced margin */
+        }
+
+        pre {
+            text-align: left;
+            font-family: Arial, sans-serif;
+            white-space: pre-wrap;
+            margin: 10px 0; /* Reduced margin */
+            background-color: #fffacd;
+            padding: 8px; /* Reduced padding */
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            width: 100%;
+            max-width: 300px;
+            margin: 15px 0; /* Reduced margin */
+        }
+
+        input[type="text"] {
+            padding: 8px; /* Reduced padding */
+            margin: 8px 0; /* Reduced margin */
+            width: calc(100% - 18px); /* Account for padding and border */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px 20px; /* Reduced padding */
+            margin: 8px 0; /* Reduced margin */
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, FireBrick, #a00040);
+            color: white;
+            cursor: pointer;
+            font-size: 1.1em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, Gold, #d4af37);
+            color: FireBrick;
+            transform: scale(1.05);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px; /* Reduced max-width */
+            padding: 15px; /* Reduced padding */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Elige un modo de juego:</h1>
+        <pre>{{ games }}</pre>
+        <form method="POST" action="/select_mode">
+            <label for="mode">Escriba uno de los números:</label>
+            <input type="text" name="mode" required>
+            <button type="submit">Seleccionar</button>
+			<p>123teachme.com</p>
+			<p>Google Images, Sheets, Gemini AI</p>
+			<p>Microsoft Windows, Copilot AI</p>
+			<p>soundcloud.com</p>
+        </form>
+    </div>
+</body>
+</html>

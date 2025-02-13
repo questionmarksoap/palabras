@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 { font-size: 2em; color: #4b0082; margin: 20px 0; }
+        form { margin: 20px 0; }
+        button {
+            padding: 10px 20px; margin: 5px; border: none; border-radius: 5px;
+            background-color: FireBrick; color: white; cursor: pointer; font-size: 1em;
+        }
+        button:hover { background-color: Gold; color: FireBrick; }
+
+        .music-container {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            width: 100%; max-width: 1200px;
+        }
+
+        .music-item, .blank-item {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 10px; border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .music-item:hover, .blank-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+
+        .blank-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .music-item p { font-size: 1.2em; color: #4b0082; margin-bottom: 10px; }
+        .music-item iframe { width: 100%; border-radius: 10px; }
+        .music-item div { font-size: 0.8em; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .music-item a { color: #4b0082; text-decoration: none; }
+        .music-item a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Canciones</h1>
+    <form action="{{ url_for('menu') }}" method="get">
+        <button type="submit">Volver al Menú</button>
+    </form>
+    <div class="music-container">
+        <div class="music-item">
+            <p>gyg</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1892740836&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank">ignorantberries</a>
+                <a href="https://soundcloud.com/titsmiggee/gg-1" title="g.y.g." target="_blank">g.y.g.</a>
+            </div>
+        </div>
+        <div class="music-item">
+            <p>e</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1670273031%3Fsecret_token%3Ds-PMEqukEFDgl&color=%232600bc&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank">ignorantberries</a>
+                <a href="https://soundcloud.com/titsmiggee/gg-1" title="g.y.g." target="_blank">g.y.g.</a>
+            </div>
+        </div>
+		<div class="blank-item"><img src="https://www.dakotazoo.org/image/cache/ARCTIC_FOX_2.jpg" alt="boxart1"></div>
+		<div class="blank-item"><img src="https://maymont.org/wp-content/uploads/2020/04/banner-red-fox.jpg" alt="boxart2"></div>
+		<!-- Check the rest of your image tags similarly -->
+
+        <div class="music-item">
+            <p>listo</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1587610935&color=%23819657&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank">ignorantberries</a>
+                <a href="https://soundcloud.com/titsmiggee/listo" title="Listo" target="_blank">Listo</a>
+            </div>
+        </div>
+        <div class="music-item">
+            <p>d</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1630240335%3Fsecret_token%3Ds-8yKccS3cTH9&color=%2330302c&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank">ignorantberries</a>
+                <a href="https://soundcloud.com/titsmiggee/w4-1/s-8yKccS3cTH9" title="W4" target="_blank">W4</a>
+            </div>
+        </div>
+		<div class="blank-item"><img src="https://www.dewildliferescue.com/wp-content/uploads/2022/12/RedFox.StephanieFaustPhotography.jpeg" alt="boxart3"></div>
+        <div class="music-item">
+            <p>near</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1320407995&color=%235c1454&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank">ignorantberries</a>
+                <a href="https://soundcloud.com/titsmiggee/near-1" title="near" target="_blank">near</a>
+            </div>
+        </div>
+        <div class="music-item">
+            <p>energy</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1307128066%3Fsecret_token%3Ds-yOSbk2F1mlw&color=%23d1d2ce&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+				<div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+					<a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank" style="color: #cccccc; text-decoration: none;">ignorantberries</a>
+					<a href="https://soundcloud.com/titsmiggee/energy-ondula/s-yOSbk2F1mlw" title="energy / ondula (2)" target="_blank" style="color: #cccccc; text-decoration: none;">energy / ondula (2)</a>
+				</div>
+        </div>
+		<div class="blank-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkmio3RTGKkPAM74WQeUCzlEM4x-KgDUPhTg&s" alt="boxart4"></div>
+		<div class="blank-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWQf8UXTjyGPF983a-hRJieM80l8qpOwVsnw&s" alt="boxart5"></div>
+		<div class="blank-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZOqgEBgERQvcsE2o9_6Xn7yDEc5Ync_veUQ&s" alt="boxart6"></div>
+        <div class="music-item">
+            <p>one</p>
+            <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1311828337%3Fsecret_token%3Ds-WPJV9h6uLn3&color=%2395edfa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div>
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank" style="color: #cccccc; text-decoration: none;">ignorantberries</a>  
+                <a href="https://soundcloud.com/titsmiggee/one-r-3/s-WPJV9h6uLn3" title="ONE (R) 3" target="_blank" style="color: #cccccc; text-decoration: none;">ONE (R) 3</a>
+            </div>
+        </div>
+        <div class="music-item">
+            <p>n</p>
+            <iframe width="100%" height="70%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1580161434%3Fsecret_token%3Ds-ZwVYH1mESH6&color=%23d1d2ce&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif; font-weight: 100;">
+                <a href="https://soundcloud.com/titsmiggee" title="ignorantberries" target="_blank" style="color: #cccccc; text-decoration: none;">ignorantberries</a>  
+                <a href="https://soundcloud.com/titsmiggee/j2-1/s-ZwVYH1mESH6" title="J2" target="_blank" style="color: #cccccc; text-decoration: none;">J2</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form action="{{ url_for('menu') }}" method="get">
+        <button type="submit">Volver al Menú</button>
+    </form>
+</body>
+</html>
